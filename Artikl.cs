@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RestoranDomaci
+﻿namespace RestoranDomaci
 {
     internal class Artikl
     {
@@ -42,10 +36,10 @@ namespace RestoranDomaci
 
         public override string ToString()
         {
-            return $"Sifra: {Id}, Naziv: {Naziv}, Cena: {Cena}";
+            return $"ID: {Id}, Naziv: {Naziv}, Cena: {Cena}";
         }
 
-        public string ToFileString()
+        public virtual string ToFileString()
         {
             return $"{Naziv},{Cena},{Id}";
         }

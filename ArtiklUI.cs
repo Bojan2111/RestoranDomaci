@@ -1,16 +1,19 @@
-﻿using RestoranDomaci.Interfejsi;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace RestoranDomaci
 {
-    internal class ArtiklUI : IReadWriteDeletable
+    internal class ArtiklUI
     {
+        public static void MeniArtikli()
+        {
+            Meni meniArtikli = new Meni();
+            meniArtikli.DodajOpciju(PiceUI.MeniPice, "Pica");
+            meniArtikli.DodajOpciju(HranaUI.MeniHrana, "Hrana");
+            meniArtikli.DodajOpciju(Ispis, "Ispis svih artikala");
+            meniArtikli.Pokreni();
+        }
         public static void Ispis()
         {
             foreach (Artikl a in Kolekcije.listaArtikala)
@@ -60,6 +63,7 @@ namespace RestoranDomaci
                 Console.WriteLine("Fajl ne postoji ili je nepravilna putanja" + adresa);
             }
         }
+
         public static void Ucitavanje(string adresa)
         {
             if (File.Exists(adresa))

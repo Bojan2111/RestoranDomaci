@@ -24,14 +24,14 @@ namespace RestoranDomaci
             Zapremina = zapremina;
             Cena = cena;
         }
-        public string ToFileString()
+        public override string ToFileString()
         {
             return $"{Naziv},{Zapremina},{Cena},{Id}";
         }
 
         public override string ToString()
         {
-            return $"{base.ToString()}, zapremina: {Zapremina}l";
+            return $"Pice: {base.ToString()}, zapremina: {Zapremina}l";
         }
     }
 }

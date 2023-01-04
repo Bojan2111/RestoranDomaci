@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace RestoranDomaci
 {
@@ -10,5 +6,6 @@ namespace RestoranDomaci
     {
         internal static List<Artikl> listaArtikala = new List<Artikl>();
         internal static List<Sto> listaStolova = new List<Sto>();
+        internal static List<TipHrane> listaTipova = new List<TipHrane>();
     }
 }

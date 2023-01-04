@@ -1,15 +1,21 @@
-﻿using RestoranDomaci.Interfejsi;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace RestoranDomaci
 {
-    internal class StoUI : IReadWriteDeletable
+    internal class StoUI
     {
+        public static void MeniStolovi()
+        {
+            Meni meniSto = new Meni();
+            meniSto.DodajOpciju(Ispis, "Ispis svih stolova");
+            meniSto.DodajOpciju(Unos, "Unos novog stola");
+            meniSto.DodajOpciju(UnosNovogArtikla, "Dodavanje artikla na sto");
+            meniSto.DodajOpciju(Brisanje, "Brisanje stola");
+            meniSto.Pokreni();
+        }
         public static void Ispis()
         {
             foreach (Sto s in Kolekcije.listaStolova)

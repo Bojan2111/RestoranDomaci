@@ -1,21 +1,25 @@
-﻿using RestoranDomaci.Interfejsi;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace RestoranDomaci
 {
-    internal class PiceUI : IReadWriteDeletable
+    internal class PiceUI
     {
+        public static void MeniPice()
+        {
+            Meni meniPice = new Meni();
+            meniPice.DodajOpciju(Ispis, "Ispisi sva pica");
+            meniPice.DodajOpciju(Unos, "Unos novog pica");
+            meniPice.DodajOpciju(Brisanje, "Brisanje pica");
+            meniPice.Pokreni();
+        }
         public static void Ispis()
         {
-            foreach (Pice p in Kolekcije.listaArtikala)
+            foreach (Artikl a in Kolekcije.listaArtikala)
             {
-                if (p is Pice)
-                    Console.WriteLine(p);
+                if (a is Pice)
+                    Console.WriteLine(a);
             }
         }
         public static void Unos()
@@ -34,12 +38,12 @@ namespace RestoranDomaci
         {
             Console.WriteLine("Unesite ID pica koje zelite obrisati:");
             int idZaBrisanje = int.Parse(Console.ReadLine());
-            foreach (Pice p in Kolekcije.listaArtikala)
+            foreach (Artikl a in Kolekcije.listaArtikala)
             {
-                if (p.Id == idZaBrisanje && p is Pice)
+                if (a is Pice && a.Id == idZaBrisanje)
                 {
-                    Kolekcije.listaArtikala.Remove(p);
-                    Bojadisanje.GresnaBoja($"Artikl sa ID brojem {idZaBrisanje} je uspesno obrisan.");
+                    Kolekcije.listaArtikala.Remove(a);
+                    Bojadisanje.GresnaBoja($"Pice sa ID brojem {idZaBrisanje} je uspesno obrisano.");
                     break;
                 }
             }
@@ -51,9 +55,10 @@ namespace RestoranDomaci
             {
                 using (StreamWriter sw = new StreamWriter(adresa, false, Encoding.UTF8))
                 {
-                    foreach (Pice p in Kolekcije.listaArtikala)
+                    foreach (Artikl a in Kolekcije.listaArtikala)
                     {
-                        sw.WriteLine(p.ToFileString());
+                        if (a is Pice)
+                            sw.WriteLine(((Pice)a).ToFileString());
                     }
                 }
             }

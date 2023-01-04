@@ -7,7 +7,10 @@ namespace RestoranDomaci
     internal class Program
     {
         private static readonly string dataDir = "data";
-        private static readonly string artiklData = "artikl.csv";
+        //private static readonly string artiklData = "artikl.csv";
+        private static readonly string piceData = "pice.csv";
+        private static readonly string tipHraneDat = "tipHrane.csv";
+        private static readonly string hranaData = "hrana.csv";
         private static readonly string stoData = "stolovi.csv";
         private static readonly string artStoDat = "artikliPoStolu.csv";
         private static readonly char sep = Path.DirectorySeparatorChar;
@@ -21,23 +24,24 @@ namespace RestoranDomaci
         {
             string putanja = PodesiPutanju();
             // Ucitavanje podataka iz fajlova na pocetku programa
-            ArtiklUI.Ucitavanje(putanja + artiklData);
+            //ArtiklUI.Ucitavanje(putanja + artiklData);
+            TipoviUI.Ucitavanje(putanja + tipHraneDat);
+            PiceUI.Ucitavanje(putanja + piceData);
+            HranaUI.Ucitavanje(putanja + hranaData);
             StoUI.Ucitavanje(putanja + stoData);
             StoUI.UcitavanjeArtikalaPoStolu(putanja + artStoDat);
 
             // Ispis menija
             Meni glavniMeni = new Meni();
-            glavniMeni.DodajOpciju(ArtiklUI.Ispis, "Ispisi sve artikle");
-            glavniMeni.DodajOpciju(ArtiklUI.Unos, "Unos novog artikla");
-            glavniMeni.DodajOpciju(ArtiklUI.Brisanje, "Brisanje artikla");
-            glavniMeni.DodajOpciju(StoUI.Ispis, "Ispis svih stolova");
-            glavniMeni.DodajOpciju(StoUI.Unos, "Unos novog stola");
-            glavniMeni.DodajOpciju(StoUI.UnosNovogArtikla, "Dodavanje artikla na sto");
-            glavniMeni.DodajOpciju(StoUI.Brisanje, "Brisanje stola");
+            glavniMeni.DodajOpciju(ArtiklUI.MeniArtikli, "Artikli");
+            glavniMeni.DodajOpciju(StoUI.MeniStolovi, "Stolovi");
             glavniMeni.Pokreni();
 
             // Cuvanje podataka u fajlove na kraju programa
-            ArtiklUI.SacuvajUFajl(putanja + artiklData);
+            //ArtiklUI.SacuvajUFajl(putanja + artiklData);
+            TipoviUI.SacuvajUFajl(putanja + tipHraneDat);
+            PiceUI.SacuvajUFajl(putanja + piceData);
+            HranaUI.SacuvajUFajl(putanja + hranaData);
             StoUI.SacuvajUFajl(putanja + stoData);
             StoUI.SacuvajArtiklePoStoluUFajl(putanja + artStoDat);
 
