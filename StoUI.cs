@@ -11,10 +11,53 @@ namespace RestoranDomaci
         {
             Meni meniSto = new Meni();
             meniSto.DodajOpciju(Ispis, "Ispis svih stolova");
+            meniSto.DodajOpciju(IzdavanjeRacuna, "Izdavanje racuna za sto");
             meniSto.DodajOpciju(Unos, "Unos novog stola");
             meniSto.DodajOpciju(UnosNovogArtikla, "Dodavanje artikla na sto");
             meniSto.DodajOpciju(Brisanje, "Brisanje stola");
             meniSto.Pokreni();
+        }
+        public static void IzdavanjeRacuna()
+        {
+            Console.WriteLine("\nUnesite ID stola za koji zelite izdati racun:");
+            int stoZaRacun = int.Parse(Console.ReadLine());
+            foreach (Sto s in Kolekcije.listaStolova)
+            {
+                if (s.Id == stoZaRacun)
+                {
+                    if (s.Artikli.Count == 0)
+                    {
+                        Bojadisanje.GresnaBoja("Za dati sto nije moguce izdati racun. Nedostaju artikli.");
+                        break;
+                    }
+                    Dictionary<Artikl,int> artKol = new Dictionary<Artikl, int>();
+                    List<StavkaRacuna> tempStavke = new List<StavkaRacuna>();
+
+                    foreach (Artikl a in s.Artikli)
+                    {
+                        if (artKol.ContainsKey(a))
+                        {
+                            artKol[a] += 1;
+                        }
+                        else
+                            artKol[a] = 1;
+                    }
+
+                    foreach (KeyValuePair<Artikl,int> k in artKol)
+                    {
+                        StavkaRacuna stavka = new StavkaRacuna(k.Key, k.Value);
+                        tempStavke.Add(stavka);
+                        Kolekcije.listaStavki.Add(stavka);
+                    }
+                    Racun tempRacun = new Racun(s, tempStavke);
+                    Kolekcije.listaRacuna.Add(tempRacun);
+                    Bojadisanje.UspesnaBoja("Racun uspesno izdat:");
+                    Console.WriteLine(tempRacun);
+                    s.Artikli.Clear();
+                    Console.WriteLine("Artikli za stolom su izbrisani. Racun arhiviran.");
+                    break;
+                }
+            }
         }
         public static void Ispis()
         {
@@ -94,7 +137,7 @@ namespace RestoranDomaci
         {
             if (File.Exists(adresa))
             {
-                Dictionary<int, List<Artikl>> tempArt = new Dictionary<int, List<Artikl>>();
+                //Dictionary<int, List<Artikl>> tempArt = new Dictionary<int, List<Artikl>>();
                 using (StreamReader srArt = new StreamReader(adresa))
                 {
                     string linijaArt;

@@ -10,6 +10,7 @@ namespace RestoranDomaci
         public int Id { get; set; }
         public int MaxOsoba { get; set; }
         public List<Artikl> Artikli { get; set; }
+        public Racun RacunZaSto { get; set; }
         public Sto()
         {
             Artikli = new List<Artikl>();
@@ -77,7 +78,6 @@ namespace RestoranDomaci
                 return $"ID stola: {Id}, Maksimalan broj osoba: {MaxOsoba}, Artikli za ovaj sto nisu odabrani";
             }
             StringBuilder sbArtikli = new StringBuilder();
-            Artikl poslednjiUListi = Artikli.Last();
             foreach (Artikl a in Artikli)
             {
                 sbArtikli.Append(a.Naziv);

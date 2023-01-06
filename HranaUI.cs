@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,11 +13,62 @@ namespace RestoranDomaci
         public static void MeniHrana()
         {
             Meni meniHrana = new Meni();
-            meniHrana.DodajOpciju(Ispis, "Ispisi svu hranu");
+            meniHrana.DodajOpciju(UpitZaIspis, "Ispisi svu hranu");
             meniHrana.DodajOpciju(Unos, "Unos nove hrane");
             meniHrana.DodajOpciju(Brisanje, "Brisanje hrane");
             meniHrana.DodajOpciju(TipoviUI.MeniTipHrane, "Tipovi Hrane");
             meniHrana.Pokreni();
+        }
+        // dodati meni za ispis hrane po rednom broju ili po abecednom redu naziva
+        public static void UpitZaIspis()
+        {
+            Meni meniSort = new Meni();
+            meniSort.DodajOpciju(IspisID, "Ispis hrane sortirane po ID broju");
+            meniSort.DodajOpciju(IspisIDDesc, "Ispis hrane sortirane po ID broju obrnuto");
+            meniSort.DodajOpciju(IspisABC, "Ispis hrane po abecednom redu");
+            meniSort.DodajOpciju(IspisABCDesc, "Ispis hrane po abecednom redu obrnuto");
+            meniSort.DodajOpciju(Ispis, "Ispisi uobicajeno");
+            meniSort.Pokreni();
+        }
+        public static void IspisABC()
+        {
+            List<Artikl> sortiraniArtikli = Kolekcije.listaArtikala;
+            sortiraniArtikli.Sort((p, q) => p.Naziv.CompareTo(q.Naziv));
+            foreach (Artikl art in sortiraniArtikli)
+            {
+                if (art is Hrana)
+                    Console.WriteLine(art);
+            }
+        }
+        public static void IspisID()
+        {
+            List<Artikl> sortiraniArtikli = Kolekcije.listaArtikala;
+            sortiraniArtikli.Sort((p, q) => p.Id.CompareTo(q.Id));
+            foreach (Artikl art in sortiraniArtikli)
+            {
+                if (art is Hrana)
+                    Console.WriteLine(art);
+            }
+        }
+        public static void IspisABCDesc()
+        {
+            List<Artikl> sortiraniArtikli = Kolekcije.listaArtikala;
+            sortiraniArtikli.Sort((p, q) => q.Naziv.CompareTo(p.Naziv));
+            foreach (Artikl art in sortiraniArtikli)
+            {
+                if (art is Hrana)
+                    Console.WriteLine(art);
+            }
+        }
+        public static void IspisIDDesc()
+        {
+            List<Artikl> sortiraniArtikli = Kolekcije.listaArtikala;
+            sortiraniArtikli.Sort((p, q) => q.Id.CompareTo(p.Id));
+            foreach (Artikl art in sortiraniArtikli)
+            {
+                if (art is Hrana)
+                    Console.WriteLine(art);
+            }
         }
         public static void Ispis()
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -9,10 +10,60 @@ namespace RestoranDomaci
         public static void MeniPice()
         {
             Meni meniPice = new Meni();
-            meniPice.DodajOpciju(Ispis, "Ispisi sva pica");
+            meniPice.DodajOpciju(UpitZaIspis, "Ispisi sva pica");
             meniPice.DodajOpciju(Unos, "Unos novog pica");
             meniPice.DodajOpciju(Brisanje, "Brisanje pica");
             meniPice.Pokreni();
+        }
+        public static void UpitZaIspis()
+        {
+            Meni meniPiceSort = new Meni();
+            meniPiceSort.DodajOpciju(IspisID, "Ispis pica sortiranog po ID broju");
+            meniPiceSort.DodajOpciju(IspisIDDesc, "Ispis pica sortiranog po ID broju obrnuto");
+            meniPiceSort.DodajOpciju(IspisABC, "Ispis pica po abecednom redu");
+            meniPiceSort.DodajOpciju(IspisABCDesc, "Ispis pica po abecednom redu obrnuto");
+            meniPiceSort.DodajOpciju(Ispis, "Ispisi uobicajeno");
+            meniPiceSort.Pokreni();
+        }
+        public static void IspisABC()
+        {
+            List<Artikl> sortiraniArtikli = Kolekcije.listaArtikala;
+            sortiraniArtikli.Sort((p, q) => p.Naziv.CompareTo(q.Naziv));
+            foreach (Artikl art in sortiraniArtikli)
+            {
+                if (art is Pice)
+                    Console.WriteLine(art);
+            }
+        }
+        public static void IspisID()
+        {
+            List<Artikl> sortiraniArtikli = Kolekcije.listaArtikala;
+            sortiraniArtikli.Sort((p, q) => p.Id.CompareTo(q.Id));
+            foreach (Artikl art in sortiraniArtikli)
+            {
+                if (art is Pice)
+                    Console.WriteLine(art);
+            }
+        }
+        public static void IspisABCDesc()
+        {
+            List<Artikl> sortiraniArtikli = Kolekcije.listaArtikala;
+            sortiraniArtikli.Sort((p, q) => q.Naziv.CompareTo(p.Naziv));
+            foreach (Artikl art in sortiraniArtikli)
+            {
+                if (art is Pice)
+                    Console.WriteLine(art);
+            }
+        }
+        public static void IspisIDDesc()
+        {
+            List<Artikl> sortiraniArtikli = Kolekcije.listaArtikala;
+            sortiraniArtikli.Sort((p, q) => q.Id.CompareTo(p.Id));
+            foreach (Artikl art in sortiraniArtikli)
+            {
+                if (art is Pice)
+                    Console.WriteLine(art);
+            }
         }
         public static void Ispis()
         {

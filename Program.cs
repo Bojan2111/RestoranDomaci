@@ -13,6 +13,8 @@ namespace RestoranDomaci
         private static readonly string hranaData = "hrana.csv";
         private static readonly string stoData = "stolovi.csv";
         private static readonly string artStoDat = "artikliPoStolu.csv";
+        private static readonly string racuniData = "racuni.csv";
+        private static readonly string stavkeData = "stavke.csv";
         private static readonly char sep = Path.DirectorySeparatorChar;
         private static string PodesiPutanju()
         {
@@ -30,11 +32,14 @@ namespace RestoranDomaci
             HranaUI.Ucitavanje(putanja + hranaData);
             StoUI.Ucitavanje(putanja + stoData);
             StoUI.UcitavanjeArtikalaPoStolu(putanja + artStoDat);
+            RacunUI.UcitavanjeStavki(putanja + stavkeData);
+            RacunUI.Ucitavanje(putanja + racuniData);
 
             // Ispis menija
             Meni glavniMeni = new Meni();
             glavniMeni.DodajOpciju(ArtiklUI.MeniArtikli, "Artikli");
             glavniMeni.DodajOpciju(StoUI.MeniStolovi, "Stolovi");
+            glavniMeni.DodajOpciju(RacunUI.MeniRacun, "Racuni");
             glavniMeni.Pokreni();
 
             // Cuvanje podataka u fajlove na kraju programa
@@ -44,6 +49,8 @@ namespace RestoranDomaci
             HranaUI.SacuvajUFajl(putanja + hranaData);
             StoUI.SacuvajUFajl(putanja + stoData);
             StoUI.SacuvajArtiklePoStoluUFajl(putanja + artStoDat);
+            RacunUI.SacuvajUFajl(putanja + racuniData);
+            RacunUI.SacuvajStavkeUFajl(putanja + stavkeData);
 
         }
     }
